@@ -44,11 +44,11 @@ class Home extends React.Component{
 	render(){
 		const diff = this.state.totalincome - this.state.totalexpense;
 		let spanClass;
-		
+
 		switch(true){
 			case (diff > 0): spanClass = 'green'; break;
 			case (diff < 0): spanClass = 'red'; break;
-			default: spanClass = '';
+			default: spanClass = 'none';
 		}
 
 		return(
@@ -56,7 +56,7 @@ class Home extends React.Component{
 				<div className="container">
 					<div className="home--intro">
 						<h1>How financially independent are you</h1>
-						<p>Calculate here your income and expenses and we'll tell you!</p>
+						<p>Calculate it here and we will tell you!</p>
 					</div>
 
 					<HomeForm 
@@ -67,21 +67,15 @@ class Home extends React.Component{
 					<ul className="result-list">
 						<li>
 							<strong>Total Income: </strong>
-							<span>
-								{this.state.totalincome}
-							</span>
+							<span>{this.state.totalincome}</span>
 						</li>
 						<li>
 							<strong>Total Expense: </strong>
-							<span>
-								{this.state.totalexpense}
-							</span>
+							<span>{this.state.totalexpense}</span>
 						</li>
 						<li>
 							<strong>Difference: </strong>
-							<span className={spanClass}>
-								{diff}
-							</span>
+							<span className={spanClass}>{diff}</span>
 						</li>
 					</ul>
 				</div>
