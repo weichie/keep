@@ -13,3 +13,24 @@ code{
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 	monospace;
 }
+
+.container{
+	max-width: 800px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 15px;
+	overflow: hidden;
+}
+
+.submit-btn{
+	padding: 10px 15px;
+	background: #111;
+	color: #fff;
+	cursor: pointer;
+	font-size: 14px;
+	border: none;
+	outline: none;
+}
+.submit-btn:hover{
+	background: #333;
+}
