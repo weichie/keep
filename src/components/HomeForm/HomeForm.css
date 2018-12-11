@@ -1,0 +1,30 @@
+.homeform{
+
+}
+
+.input-row{
+	margin-bottom: 25px;
+	float: left;
+	padding: 0 5px;
+}
+.input-row.full 		{width: 100%;}
+.input-row.half		{width: 50%;}
+.input-row.small 		{width: 25%;}
+.input-row label{
+	color: #111;
+	font-weight: 300;
+	font-size: 16px;
+	display: block;
+	margin-bottom: 5px;
+}
+
+.input-row input{
+	width: 100%;
+	font-size: 16px;
+	padding: 5px;
+	outline: none;
+	border: 1px solid #ccc;
+}
+.input-row input:focus{
+	border: 1px solid #000;
+}
