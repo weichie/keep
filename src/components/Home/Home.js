@@ -10,8 +10,8 @@ class Home extends React.Component{
 		this.state = {
 			income: {},
 			expense: {},
-			totalIncome: 0,
-			totalExpense: 0
+			totalincome: 0,
+			totalexpense: 0
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,36 +19,38 @@ class Home extends React.Component{
 
 	handleChange = e => {
 		const incometype = e.target.attributes.getNamedItem('incometype').value;
+		const statekey = `total${incometype}`;
 
-		if(incometype === 'income'){
-			let income = {...this.state.income};
-			income[e.target.name] = Math.trunc(e.target.value);
+		let updateState = {...this.state[incometype]};
+		updateState[e.target.name] = Math.trunc(e.target.value);
+		
+		this.setState({
+			[incometype]: updateState
+		}, () => {
+			let sum_arr = Object.keys(this.state[incometype]).map((k) => this.state[incometype][k]);
+			let total = sum_arr.reduce((x, y) => x + y, 0);
+
 			this.setState({
-				income
-			}, () => {
-				let income_arr = Object.keys(this.state.income).map((k) => this.state.income[k]);
-				let totalIncome = income_arr.reduce((x, y) => x + y, 0);
-				this.setState({totalIncome});
+				[statekey]: total
 			});
-		}else{
-			let expense = {...this.state.expense};
-			expense[e.target.name] = e.target.value;
-			this.setState({
-				expense,
-			}, () => {
-				let expense_arr = Object.keys(this.state.expense).map((k) => Math.trunc(this.state.expense[k]));
-				let totalExpense = expense_arr.reduce((x, y) => x + y, 0);
-				this.setState({totalExpense});
-			});
-		}
+		});
 	}
 
 	handleSubmit = e => {
 		e.preventDefault();
-		console.log(this.state.totalIncome - this.state.totalExpense);
+		console.log(this.state.totalincome - this.state.totalexpense);
 	}
 
 	render(){
+		const diff = this.state.totalincome - this.state.totalexpense;
+		let spanClass;
+		
+		switch(true){
+			case (diff > 0): spanClass = 'green'; break;
+			case (diff < 0): spanClass = 'red'; break;
+			default: spanClass = '';
+		}
+
 		return(
 			<div className="home--wrapper">
 				<div className="container">
@@ -62,8 +64,26 @@ class Home extends React.Component{
 						handleChange={this.handleChange}
 					/>
 
-					Total Income: {this.state.totalIncome}<br />
-					Total Expense: {this.state.totalExpense}
+					<ul className="result-list">
+						<li>
+							<strong>Total Income: </strong>
+							<span>
+								{this.state.totalincome}
+							</span>
+						</li>
+						<li>
+							<strong>Total Expense: </strong>
+							<span>
+								{this.state.totalexpense}
+							</span>
+						</li>
+						<li>
+							<strong>Difference: </strong>
+							<span className={spanClass}>
+								{diff}
+							</span>
+						</li>
+					</ul>
 				</div>
 			</div>
 		);

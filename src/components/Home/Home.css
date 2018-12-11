@@ -9,3 +9,18 @@
 .home--intro h1{
 	margin-bottom: 15px;
 }
+
+.result-list{
+	list-style-type: none;
+	padding: 0; margin: 0;
+	margin-top: 25px;
+}
+.result-list li{
+	padding: 10px;
+}
+.result-list strong{
+	display: inline-block;
+	width: 150px;
+}
+span.red 		{color: red;}
+span.green 		{color: green;}
